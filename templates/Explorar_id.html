@@ -1,27 +1,39 @@
 {% extends "base.html" %}
 {% block title %}Cartelera de FilmBank{% endblock %}
 {% block head %}
-<style>
-  .link-secondary {
-      text-decoration: none; /* Quita el subrayado de los enlaces */
-  }
-</style>
+
 {% endblock %}
 {% block body %}
-<div class="text-center">
-    <h1>Revistas</h1>
-    <h2>Palabras clave que comienzan con la letra "{{ id }}"</h2>
-    <table class="table table-striped">
-        <thead>
-            <th>Palabras Clave</th>
-        </thead>
-        <tbody>
-            {% for palabra_clave in palabras_clave %}
-            <tr>
-                <td width="20%"><a href="/Explorar/{{id}}/{{ palabra_clave }}" class="link-secondary">{{ palabra_clave }}</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="text-center mx-auto">
+    <h1 class="text-3xl font-bold text-center mt-8 mb-4">Revistas</h1>
+    <h2 class="text-xl font-semibold text-gray-700 text-center mb-6">Palabras clave que comienzan con la letra "{{ id }}"</h2>
+</div>
+<div class="flex flex-col mx-auto mt-4">
+    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+                <table class="min-w-full border border-black rounded-lg">
+                    <thead class="bg-gray-200 border-b">
+                        <tr>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                #
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Palabras Clave
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for palabra_clave in palabras_clave %}
+                        <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ loop.index }}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><a href="/Explorar/{{id}}/{{ palabra_clave }}" class="Titulo">{{ palabra_clave }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

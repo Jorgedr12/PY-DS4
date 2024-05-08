@@ -1,44 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Cartelera de FilmBank{% endblock %}
 {% block head %}
-<style>
-  .link-secondary {
-      text-decoration: none; /* Quita el subrayado de los enlaces */
 
-  }
-  
-</style>
 {% endblock %}
 {% block body %}
-<div class="text-center">
+<div class="text-center mx-auto">
     <h1>Revistas</h1>
     <h3>Ordenadas por la palabra: {{palabra}}</h3>
-    <table class="table table-striped">
-        <thead>
-          <th></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="1">
-              <table class="table table-striped">
-                <thead>
-                    <th>Titulo</th>
-                    <th>Catalogo</th>
-                    <th>Factor de impacto</th>
-                </thead>
-                <tbody>
-                  {% for revista in revistas %}
-                  <tr>
-                    <td width="20%"><a href="/Revista/{{revista['Titulo']}}"class="link-secondary">{{revista['Titulo']}}</a></td>
-                    <td width="50%">{{revista['Catalogo']}}</td>
-                    <td width="20%">{{revista['SJR']}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+</div>
+<div class="flex flex-col mx-auto">
+    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+                <table class="min-w-full border border-black rounded-lg"> <!-- Añadidas clases para bordes y redondeo -->
+                    <thead class="bg-gray-200 border-b">
+                        <tr>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                #
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Titulo
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Catalogo
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                SJR
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for revista in revistas %}
+                        <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ loop.index }}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" width="20%"><a href="/Revista/{{revista['Titulo']}}" class="Titulo">{{revista['Titulo']}}</a></td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" width="50%">{{ revista['Catalogo'] }}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" width="20%">{{ revista['SJR'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

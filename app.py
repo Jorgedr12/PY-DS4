@@ -7,6 +7,7 @@ import os
 if not os.path.exists("datos/revistas.csv"):
     guardardatos()
 
+# Por defecto, se cargan los datos de revistas2.csv ya que tiene menos datos y es más rápido, pero si se desea cargar todas las revistas, nomas se debe cambiar la variable archivo_revistas a "datos/revistas.csv"
 archivo_revistas = "datos/revistas2.csv"
 app = Flask(__name__)
 revistas = carga_csv(archivo_revistas)
@@ -63,6 +64,14 @@ def search():
             return render_template("buscar.html", revistas_busqueda=Revistas_Coinciden, Term_Busc=Term_Buscado)
         else:
             return render_template("Error.html")
+
+@app.route("/prueba")
+def prueba():
+    return render_template("prueba.html", alfabeto=diccionario_alfabetico)
+
+@app.route("/prueba2")
+def prueba2():
+    return render_template("prueba2.html", alfabeto=diccionario_alfabetico)
         
 
 def main():

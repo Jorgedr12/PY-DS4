@@ -3,50 +3,63 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-<div class="container d-flex align-items-center justify-content-center" style="height: 80vh;">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mx-auto" style="width: 27rem; background-color: rgb(198, 198, 198);">
-                <div class="card-body">
-                    <h2 class="card-title text-center">{{ revista['Titulo'] }}</h2>
-                    <h6 class="card-subtitle text-center">URL =</h6>
-                    <h6 class="card-subtitle text-center"><a href="{{ revista['url'] }}" class="link-secondary" style="text-decoration: none;">{{ revista['url'] }}</a></h6>
-                    <h6 class="card-subtitle text-center">Catalogo = <span style="color: darkslategray;"> {{ revista['Catalogo'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">Factor de impacto = <span style="color: darkslategray;">{{ revista['SJR'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">Q = <span style="color: darkslategray;">{{ revista['Q'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">H-index = <span style="color: darkslategray;">{{ revista['h_index'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">Total Citas = <span style="color: darkslategray;">{{ revista['Total Citas'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">Areas y Categorias = </h6>
-                    <h6 class="card-subtitle "><span style="color: darkslategray;">
-                        {% set categories = revista['Areas y Categorias'].split(' | ') %}
-                        {% for category in categories %}
-                        <!-- El &nbsp; es un espacio en unicode -->
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.split(': ')[0] }}<br>
-                            {% for subcategory in category.split(': ')[1].split(' + ') %}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-{{ subcategory }}<br>
-                            {% endfor %}
-                        {% endfor %}
-                    </span>
-                    </h6>
-                    <h6 class="card-subtitle text-center">Publisher = <span style="color: darkslategray;">{{ revista['Publisher'] }}</span></h6>
-                    <h6 class="card-subtitle text-center">ISSN =<span style="color: darkslategray;">
-                        {% for issn in revista['ISSN'].split() %}
-                            {{ issn }}
-                            {% if not loop.last %} y {% endif %}
-                        {% endfor %}
-                    </span>
-                    </h6>
+
+<style>
+    .bg{
+        background-color: #E1B73D;
+    }
+</style>
+
+<div class="min-w-screen min-h-screen bg flex items-center p-5 lg:p-10 overflow-hidden relative">
+    <div class="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+        <div class="md:flex items-center -mx-10">
+            <div class="w-full md:w-1/2 px-10 mb-10 md:mb-0 flex justify-center items-center">
+                <div class="relative">
+                    <div class="w-full h-full flex justify-center items-center border-2 border-orange-500">{{ revista['Widget'] | safe }}</div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            {% if revista['Widget'] %}
-                <div class="card mx-auto" style="width: 23rem; background-color: rgb(198, 198, 198);">
-                    <div class="card-body text-center">
-                        {{ revista['Widget'] | safe }}
+            <div class="w-full md:w-1/2 px-10">
+                <div class="mb-10">
+                    <h1 class="font-bold uppercase text-2xl mb-2 text-center pb-3">{{revista['Titulo']}}</h1>
+                    <p class="text-sm">
+                        <div class="pb-6">
+                        <span style="color: darkslategray;">
+                            {% set categories = revista['Areas y Categorias'].split(' | ') %}
+                            {% for category in categories %}
+                            <!-- El &nbsp; es un espacio en unicode -->
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.split(': ')[0] }}<br>
+                                {% for subcategory in category.split(': ')[1].split(' + ') %}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-{{ subcategory }}<br>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-wrap justify-center">
+                            <div class="mx-4 text-center">
+                                <h3 class="mb-2"><span class="font-semibold">Catalogo: </span>{{revista['Catalogo']}}</h3>
+                                <h3 class="mb-2"><span class="font-semibold">Q: </span>{{revista['Q']}}</h3>
+                            </div>
+                            <div class="mx-4">
+                                <h3 class="mb-2 text-center"><span class="font-semibold">Factor de Impacto: </span>{{revista['SJR']}}</h3>
+                                <h3 class="mb-2 text-center"><span class="font-semibold">Total de Citas: </span>{{revista['Total Citas']}}</h3>
+                            </div>
+                            <h3 class="mb-2"><span class="font-semibold">H_Index: </span>{{revista['h_index']}}</h3>
+                        </div>                        
+                </div>
+                <div class="text-center">
+                    <div class="inline-block align-bottom mr-5 pb-3">
+                        <span class="font-bold text-xl leading-none align-baseline">Publisher:</span>
+                        <span class="font-semibold text-xl leading-none align-baseline">{{revista['Publisher']}}</span>
+                    </div>
+                    <div class="inline-block align-bottom mr-5 pb-3">
+                        <span class="font-bold text-xl leading-none align-baseline">ISSN: </span>
+                        <span class="font-semibold text-xl leading-none align-baseline">{{revista['ISSN']}}</span>
+                    </div>
+                    
+                    <div class="inline-block align-bottom">
+                       <a href="{{revista['url']}}"><button class="bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold"><i class="mdi mdi-cart -ml-2 mr-2"></i> Más Información</button></a>
                     </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>
