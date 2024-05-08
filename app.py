@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from funciones import carga_csv, crea_diccionario_revistas, crea_diccionario_alfabetico, crea_diccionario_ptitulo
+from funciones import carga_csv, crea_diccionario_revistas, crea_diccionario_alfabetico
 from datos import guardardatos
 import os
 
@@ -13,7 +13,10 @@ app = Flask(__name__)
 revistas = carga_csv(archivo_revistas)
 diccionario_revistas = crea_diccionario_revistas(revistas)
 diccionario_alfabetico = crea_diccionario_alfabetico(revistas)
-diccionario_ptitulo = crea_diccionario_ptitulo(revistas)
+
+diccionario_letras = ["1", "2", "3", "4", "5", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+
 
 @app.route('/')
 def index():
@@ -21,31 +24,36 @@ def index():
 
 @app.route("/Explorar")
 def Explorar():
-    return render_template("Explorar.html", diccionario_alfabetico=diccionario_alfabetico)
+    return render_template("Explorar.html", diccionario_letras=diccionario_letras)
 
 
 @app.route("/Explorar/<id>")
 def Explorar_id(id:str):
+    palabras_clave = []
     if id in diccionario_alfabetico:
         palabras_clave = sorted({revista["Titulo"].split()[0] for revista in diccionario_alfabetico[id]})
         return render_template("Explorar_id.html", id=id, palabras_clave=palabras_clave)
     else:
-        return "No se encontró ninguna revista con esa inicial."
+        return render_template("Error.html")
     
 @app.route("/Explorar/<id>/<palabra>")
 def Explorar_id_palabra(id:str, palabra:str):
+    revistas = []
     if id in diccionario_alfabetico:
         revistas = diccionario_alfabetico[id]
         revistas = [revista for revista in revistas if revista["Titulo"].split()[0] == palabra]
         return render_template("Explorar_id_palabra.html", id=id, palabra=palabra, revistas=revistas)
     else:
-        return "No se encontró ninguna revista con esa inicial."
+        return render_template("Error.html")
 
 @app.route("/Revista/<id>")
 def revista_id(id:str):
+    revista = []
     if id in diccionario_revistas:
         revista = diccionario_revistas[id]
-    return render_template("Revista_id.html", revista=revista)
+        return render_template("Revista_id.html", revista=revista)
+    else:
+        return render_template("Error.html")
 
 
 @app.route("/Creditos")
@@ -64,15 +72,6 @@ def search():
             return render_template("buscar.html", revistas_busqueda=Revistas_Coinciden, Term_Busc=Term_Buscado)
         else:
             return render_template("Error.html")
-
-@app.route("/prueba")
-def prueba():
-    return render_template("prueba.html", alfabeto=diccionario_alfabetico)
-
-@app.route("/prueba2")
-def prueba2():
-    return render_template("prueba2.html", alfabeto=diccionario_alfabetico)
-        
 
 def main():
     app.run(debug=True)

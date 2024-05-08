@@ -24,12 +24,12 @@
                     <p class="text-sm">
                         <div class="pb-6">
                         <span style="color: darkslategray;">
+                            <h3 class="mb-2"><span class="font-semibold">Área temática y categoría: </span></h3>
                             {% set categories = revista['Areas y Categorias'].split(' | ') %}
                             {% for category in categories %}
-                            <!-- El &nbsp; es un espacio en unicode -->
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.split(': ')[0] }}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.split(': ')[0] }}<br>
                                 {% for subcategory in category.split(': ')[1].split(' + ') %}
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-{{ subcategory }}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-{{ subcategory }}<br>
                                 {% endfor %}
                             {% endfor %}
                         </div>

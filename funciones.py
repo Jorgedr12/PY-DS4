@@ -31,25 +31,17 @@ def crea_diccionario_alfabetico(lista_revistas:list)->dict:
     d = {k: v for k, v in sorted(d.items(), key=lambda item: item[0])}
     return d
 
-def crea_diccionario_ptitulo(lista_revistas:list)->dict:
-    d = {}
-    for revista in lista_revistas:
-        key = revista["Titulo"].split()[0]
-        if key in d:
-            d[key].append(revista)
-        else:
-            d[key] = [revista]
-        for key in d:
-            d[key] = sorted(d[key], key=lambda x: x["Titulo"])
-    d = {k: v for k, v in sorted(d.items(), key=lambda item: item[0])}
-    return d
+def main():
+    lista = carga_csv("datos/revistas.csv")
+    d = crea_diccionario_revistas(lista)
+    print(d)
+    d = crea_diccionario_alfabetico(lista)
+    print(d)
 
 if __name__ == "__main__":
-    lista =carga_csv("datos/revistas.csv")
+    main()
 
 
-    d = crea_diccionario_ptitulo(lista)
-    print(d)
     
 
 

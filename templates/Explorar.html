@@ -22,8 +22,8 @@
    
     <div class="container mx-auto">
       <ul class="horizontal-list">
-        {% for Titulo,lista_revistas in diccionario_alfabetico.items() %}
-              <li><a href="/Explorar/{{Titulo}}" class="px-4 py-2 text-black rounded">{{ Titulo }}</a></li>
+        {% for letra in diccionario_letras %}
+              <li><a href="/Explorar/{{letra}}" class="px-4 py-2 text-black rounded">{{ letra }}</a></li>
           {% endfor %}
       </ul>
     </div>
