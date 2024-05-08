@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Cartelera de FilmBank{% endblock %}
+{% block head %}
+<style>
+  .link-secondary {
+      text-decoration: none; /* Quita el subrayado de los enlaces */
+
+  }
+  
+</style>
+{% endblock %}
+{% block body %}
+<div class="text-center">
+    <h1>Revistas</h1>
+    <h3>Buscadas por: {{Term_Buscado}}</h3>
+    <table class="table table-striped">
+        <thead>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="1">
+              <table class="table table-striped">
+                <thead>
+                    <th>Titulo</th>
+                    <th>Catalogo</th>
+                    <th>Factor de impacto</th>
+                </thead>
+                <tbody>
+                  {% for revista in revistas_busqueda %}
+                  <tr>
+                    <td width="20%"><a href="/Revista/{{revista['Titulo']}}"class="link-secondary">{{revista['Titulo']}}</a></td>
+                    <td width="50%">{{revista['Catalogo']}}</td>
+                    <td width="20%">{{revista['SJR']}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+{% endblock %}

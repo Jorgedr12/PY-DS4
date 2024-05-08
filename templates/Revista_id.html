@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %} {{ revista['Titulo'] }} {% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div class="container d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mx-auto" style="width: 27rem; background-color: rgb(198, 198, 198);">
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{ revista['Titulo'] }}</h2>
+                    <h6 class="card-subtitle text-center">URL =</h6>
+                    <h6 class="card-subtitle text-center"><a href="{{ revista['url'] }}" class="link-secondary" style="text-decoration: none;">{{ revista['url'] }}</a></h6>
+                    <h6 class="card-subtitle text-center">Catalogo = <span style="color: darkslategray;"> {{ revista['Catalogo'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">Factor de impacto = <span style="color: darkslategray;">{{ revista['SJR'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">Q = <span style="color: darkslategray;">{{ revista['Q'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">H-index = <span style="color: darkslategray;">{{ revista['h_index'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">Total Citas = <span style="color: darkslategray;">{{ revista['Total Citas'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">Areas y Categorias = </h6>
+                    <h6 class="card-subtitle "><span style="color: darkslategray;">
+                        {% set categories = revista['Areas y Categorias'].split(' | ') %}
+                        {% for category in categories %}
+                        <!-- El &nbsp; es un espacio en unicode -->
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.split(': ')[0] }}<br>
+                            {% for subcategory in category.split(': ')[1].split(' + ') %}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-{{ subcategory }}<br>
+                            {% endfor %}
+                        {% endfor %}
+                    </span>
+                    </h6>
+                    <h6 class="card-subtitle text-center">Publisher = <span style="color: darkslategray;">{{ revista['Publisher'] }}</span></h6>
+                    <h6 class="card-subtitle text-center">ISSN =<span style="color: darkslategray;">
+                        {% for issn in revista['ISSN'].split() %}
+                            {{ issn }}
+                            {% if not loop.last %} y {% endif %}
+                        {% endfor %}
+                    </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% if revista['Widget'] %}
+                <div class="card mx-auto" style="width: 23rem; background-color: rgb(198, 198, 198);">
+                    <div class="card-body text-center">
+                        {{ revista['Widget'] | safe }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

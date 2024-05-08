@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} {{ revista['Titulo'] }} {% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div class="container d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mx-auto" style="width: 20rem; background-color: rgb(198, 198, 198);">
+                <div class="card-body text-center">
+                    <h6 class="card-title mb-2 text-muted"> <a><img src="https://i.pinimg.com/736x/95/6d/4c/956d4c5a4d5ccf2cc32b5714b362dd05.jpg" alt="FilmBank" width="226px" ></a></h6>
+                    <h2 class="card-title">Jorge</h2>
+                    <h6 class="card-subtitle">"Frase"</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mx-auto" style="width: 20rem; background-color: rgb(198, 198, 198);">
+                <div class="card-body text-center">
+                    <h6 class="card-title mb-2 text-muted"> <a><img src="https://i.pinimg.com/564x/a7/2e/50/a72e50bd8bb773a9840ca7d848bdf6c6.jpg" alt="FilmBank" width="200px" ></a></h6>
+                    <h2 class="card-title">Kevin</h2>
+                    <h6 class="card-subtitle">"Frase"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

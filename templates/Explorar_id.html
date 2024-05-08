@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Cartelera de FilmBank{% endblock %}
+{% block head %}
+<style>
+  .link-secondary {
+      text-decoration: none; /* Quita el subrayado de los enlaces */
+  }
+</style>
+{% endblock %}
+{% block body %}
+<div class="text-center">
+    <h1>Revistas</h1>
+    <h2>Palabras clave que comienzan con la letra "{{ id }}"</h2>
+    <table class="table table-striped">
+        <thead>
+            <th>Palabras Clave</th>
+        </thead>
+        <tbody>
+            {% for palabra_clave in palabras_clave %}
+            <tr>
+                <td width="20%"><a href="/Explorar/{{id}}/{{ palabra_clave }}" class="link-secondary">{{ palabra_clave }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Cartelera de FilmBank{% endblock %}
+{% block head %}
+<style>
+  .link-secondary {
+      text-decoration: none; /* Quita el subrayado de los enlaces */
+  }
+
+</style>
+{% endblock %}
+{% block body %}
+<div class="text-center">
+    <h1>Revistas</h1>
+    <h2>Seleccione la letra a buscar</h2>
+    <table class="table table-striped">
+        <thead>
+          <th></th>
+        </thead>
+        <tbody>
+          <td colspan="1">
+            <table class="table table-striped">
+              <thead>
+                  <th>Letra</th>
+              </thead>
+              <tbody>
+                {% for Titulo,lista_revistas in diccionario_alfabetico.items() %}
+                <tr>
+                  <td width="20%"><a href="/Explorar/{{Titulo}}"class="link-secondary">{{Titulo}}</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </td>
+        </tbody>
+      </table>
+</div>
+{% endblock %}
