@@ -1,3 +1,7 @@
+# Duate Ruiz Jorge Luis
+# Martínez Haro Kevin Xandé
+# Proyecto Final DS4 - 09/05/2024
+
 from revista import readUrl, scrap, getDataFromTable, saveToCSV
 
 def guardardatos():

@@ -1,3 +1,7 @@
+# Duate Ruiz Jorge Luis
+# Martínez Haro Kevin Xandé
+# Proyecto Final DS4 - 09/05/2024
+
 from flask import Flask, render_template, request
 from funciones import carga_csv, crea_diccionario_revistas, crea_diccionario_alfabetico
 from datos import guardardatos

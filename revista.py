@@ -1,3 +1,7 @@
+# Duate Ruiz Jorge Luis
+# Martínez Haro Kevin Xandé
+# Proyecto Final DS4 - 09/05/2024
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -165,12 +169,13 @@ def saveToCSV(lista_revistas, savename):
 
 def main():
     firstURL = readUrl()[0]
-    print(firstURL)
+    SecondURL = readUrl()[1]
     pagina=scrap(firstURL)
     lista_revistas = getDataFromTable(pagina)
-    for revista in lista_revistas:
-        print(revista)
+    pagina=scrap(SecondURL)
+    lista_revistas.extend(getDataFromTable(pagina))
     saveToCSV(lista_revistas, 'datos/revistas2')
+    print('Datos guardados en datos/revistas2.csv')
     #saveToJSON(lista_revistas, 'datos/revistas')
 
 if __name__ == '__main__':

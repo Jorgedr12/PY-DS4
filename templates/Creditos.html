@@ -1,3 +1,9 @@
+<!--
+    Duate Ruiz Jorge Luis
+    Martínez Haro Kevin Xandé
+    Proyecto Final DS4 - 09/05/2024
+-->
+
 {% extends "base.html" %}
 {% block title %} {{ revista['Titulo'] }} {% endblock %}
 {% block head %}
@@ -63,7 +69,6 @@
 </style>
 
 <script>
-  // Function to fetch user details from GitHub API
   async function fetchUserDetails(username, index) {
     const url = `https://api.github.com/users/${username}`;
     try {
@@ -76,7 +81,6 @@
     }
   }
 
-  // Function to update the profile card with fetched user details
   async function updateProfileCard(username, index) {
     const { data, error } = await fetchUserDetails(username, index);
     if (error) {
@@ -94,7 +98,6 @@
     document.getElementById(`githubcorner${index}`).href = html_url;
   }
 
-  // Call the updateProfileCard function with the usernames
   updateProfileCard('Jorgedr12', 1);
   updateProfileCard('Transa1', 2);
 </script>
